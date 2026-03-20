@@ -51,19 +51,19 @@ export const PHILOSOPHY_OPTIONS = [
     id: 'fixed',
     emoji: '📅',
     label: 'Fixed amount',
-    description: 'Same amount every period regardless of behavior or chores',
+    description: 'Kids get a fixed allowance amount on a schedule, no strings attached.',
   },
   {
     id: 'earned',
     emoji: '✅',
-    label: 'Earned allowance',
-    description: 'Tied to completing chores or meeting expectations',
+    label: 'Conditional on chores',
+    description: 'Kids have to complete all or most of their chores in order to get their allowance.',
   },
   {
     id: 'hybrid',
     emoji: '⚡',
     label: 'Hybrid approach',
-    description: 'Base amount always paid, with bonus opportunity for extra effort',
+    description: 'Kids get a smaller fixed amount but can earn more by completing extra chores.',
   },
 ]
 
@@ -72,13 +72,13 @@ export const FREQUENCY_OPTIONS = [
     id: 'weekly',
     emoji: '📅',
     label: 'Weekly',
-    description: 'More frequent paydays build habit and budgeting practice',
+    description: 'More chances to make decisions about their money',
   },
   {
     id: 'monthly',
     emoji: '🗓️',
     label: 'Monthly',
-    description: 'Bigger lump sum teaches longer-term planning and restraint',
+    description: 'Helps build real budgeting and planning skills',
   },
 ]
 
@@ -89,38 +89,35 @@ export const STEP_CONTENT = [
   },
   {
     question: "Where do you live?",
-    subtext: "Local prices affect what money actually buys — we factor that in.",
+    subtext: "The same allowance goes further in a small town than it does in a big city. We adjust your range based on where you live.",
   },
   {
     question: "What will the allowance cover?",
-    subtext: "More responsibility means a higher baseline to match real expenses.",
+    subtext: "Is this fun money or are they covering real expenses?",
   },
   {
     question: "What's your allowance philosophy?",
-    subtext: "This shapes the insight tips we share — not the dollar amount.",
+    subtext: "There's no wrong answer — each approach teaches different money skills. Pick what fits your family.",
   },
   {
-    question: "How often will you pay?",
-    subtext: "We'll convert the weekly rate to your preferred schedule.",
+    question: "How often do you want your kid to receive their allowance?",
+    subtext: "This changes how your child experiences money. Both options work but they teach different financial skills.",
   },
 ]
 
-export const SPENDING_HINT = {
-  fun: "Fun money only means parents still cover clothing, activities, and most personal expenses. Allowance is purely discretionary.",
-  personal: "Personal items allowances typically include entertainment subscriptions, hobby supplies, and personal grooming products.",
-  real: "Real-world purchases means kids start experiencing true costs — clothes wear out, shoes cost real money.",
-  full: "Full independence is rare under age 14 but powerful for teens with part-time jobs or strong financial maturity.",
-}
+export const SPENDING_HINT = "If your child has a part-time job or earns money on their own, their allowance may cover fewer expenses. Pick the tier that most-closely matches what you expect allowance to cover, not their total spending."
 
-export const PHILOSOPHY_HINT = {
-  fixed: "Fixed allowances separate money from chores — kids learn budgeting without connecting compensation to household duties.",
-  earned: "Earned allowances can motivate, but research shows very strict tying to chores can undermine intrinsic motivation over time.",
-  hybrid: "Hybrid approaches are popular with financial educators — kids get baseline security while still experiencing earning.",
-}
+export const PHILOSOPHY_HINT = "Parents are roughly split down the middle on this one. About half believe allowance should be given out consistently regardless of chores, treating it as a tool to practice making regular financial decisions. The other half believe tying allowance to chores teaches kids that money is earned through work. The best choice is the one that matches what you're trying to teach."
 
 export const FREQUENCY_HINT = {
-  young: "For kids under 13, weekly allowance helps build budgeting habits — the shorter feedback loop makes consequences more tangible.",
-  teen: "Teens often benefit from monthly allowances, which mirror adult pay cycles and teach longer-horizon planning.",
+  young: {
+    recommendation: "Weekly.",
+    body: "At this age, the more often your child handles money and makes decisions with it, the faster the lessons stick. Weekly allowance means 52 chances a year to practice spending, saving, and making tradeoffs.",
+  },
+  teen: {
+    recommendation: "lean toward weekly.",
+    body: "Repetition is what builds good money habits, and weekly gives them 52 chances a year to practice. Monthly is worth considering if you want to really challenge your teen to develop more advanced budgeting skills.",
+  },
 }
 
 // INSIGHTS[philosophy][frequency][ageGroup] → array of 3 { headline, body }
@@ -331,5 +328,5 @@ export const BREAKDOWN_LABELS = {
   },
 }
 
-export const CTA_URL = 'https://www.till.com'
+export const CTA_URL = 'https://tillfinancial.com'
 export const GUIDE_URL = 'https://www.till.com/resources/allowance-guide'

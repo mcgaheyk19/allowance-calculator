@@ -1,23 +1,29 @@
+export const MODERN_GRADIENT = 'linear-gradient(166deg, #25B8E8 11.772%, #1E94CF 51.924%, #634AEF 92.075%)'
+
 export const COLORS = {
-  green:     '#00C853',
-  greenDark: '#00A846',
-  greenGlow: 'rgba(0, 200, 83, 0.15)',
-  navy:      '#1A1A2E',
-  navyMid:   '#16213E',
-  navyLight: '#0F3460',
-  white:     '#FFFFFF',
-  gray100:   '#F9FAFB',
-  gray200:   '#F3F4F6',
-  gray300:   '#E5E7EB',
-  gray500:   '#6B7280',
-  gray700:   '#374151',
-  gray900:   '#111827',
+  primary:      '#5650F0',
+  primaryDark:  '#7043EE',
+  primaryGlow:  'rgba(86, 80, 240, 0.12)',
+  primaryTint:  '#F6F7FE',
+  white:        '#FFFFFF',
+  bg:           '#F6F6F8',
+  gray100:      '#F8F9FA',
+  gray150:      '#F2F5F8',
+  gray200:      '#E8F0F3',
+  gray300:      '#DAE0E4',
+  gray400:      '#C2CBD2',
+  gray500:      '#9BAAB6',
+  gray600:      '#697885',
+  gray700:      '#536471',
+  gray800:      '#0F1419',
+  green:        '#2AA266',
+  greenLight:   '#D5EEE1',
 }
 
 export const CARD_STYLE = {
   backgroundColor: '#FFFFFF',
   borderRadius: 24,
-  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04)',
+  boxShadow: '0 4px 24px rgba(15,20,25,0.08), 0 1px 4px rgba(15,20,25,0.04)',
   overflow: 'hidden',
   width: '100%',
   maxWidth: 520,
@@ -26,7 +32,7 @@ export const CARD_STYLE = {
 
 export const CARD_TOP_BAR = {
   height: 4,
-  background: 'linear-gradient(90deg, #00C853, #00E676)',
+  background: MODERN_GRADIENT,
   borderRadius: '24px 24px 0 0',
 }
 
@@ -34,13 +40,13 @@ export const OPTION_BASE = {
   display: 'flex',
   alignItems: 'center',
   gap: 12,
-  padding: '14px 16px',
-  borderRadius: 12,
-  border: '2px solid #E5E7EB',
-  backgroundColor: '#FFFFFF',
+  padding: '0 16px 0 15px',
+  borderRadius: 20,
+  border: '1px solid #F2F5F8',
+  backgroundColor: '#F8F9FA',
   cursor: 'pointer',
-  transition: 'border-color 150ms ease, box-shadow 150ms ease',
-  minHeight: 56,
+  transition: 'border-color 150ms ease',
+  height: 96,
   textAlign: 'left',
   width: '100%',
   boxSizing: 'border-box',
@@ -48,50 +54,49 @@ export const OPTION_BASE = {
 
 export const OPTION_SELECTED = {
   ...OPTION_BASE,
-  border: '2px solid #00C853',
-  boxShadow: '0 0 0 3px rgba(0, 200, 83, 0.15)',
-  backgroundColor: '#F0FDF4',
+  backgroundColor: '#E9F2FA',
+  boxShadow: 'inset 0 0 0 1.5px #25B8E8',
 }
 
 export const PRIMARY_BUTTON = {
   display: 'block',
   width: '100%',
   padding: '14px 24px',
-  backgroundColor: '#00C853',
+  background: MODERN_GRADIENT,
   color: '#FFFFFF',
   border: 'none',
-  borderRadius: 12,
+  borderRadius: 100,
   fontSize: 16,
-  fontWeight: 600,
-  fontFamily: 'DM Sans, sans-serif',
+  fontWeight: 700,
+  fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
   cursor: 'pointer',
-  transition: 'background-color 150ms ease, transform 100ms ease',
+  transition: 'opacity 150ms ease, transform 100ms ease',
   letterSpacing: '0.01em',
 }
 
 export const GHOST_BUTTON = {
   background: 'none',
   border: 'none',
-  color: '#6B7280',
-  fontSize: 14,
-  fontWeight: 500,
-  fontFamily: 'DM Sans, sans-serif',
+  color: '#697885',
+  fontSize: 16,
+  fontWeight: 400,
+  fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
   cursor: 'pointer',
   padding: '8px 0',
-  textDecoration: 'underline',
+  textDecoration: 'none',
 }
 
 export const INSIGHT_CARD = {
-  backgroundColor: '#F0FDF4',
-  border: '1px solid #BBF7D0',
-  borderRadius: 12,
+  backgroundColor: '#F6F7FE',
+  border: '1px solid #DAE0E4',
+  borderRadius: 16,
   padding: '14px 16px',
 }
 
 export const HINT_BOX = {
-  backgroundColor: '#F9FAFB',
-  border: '1px solid #E5E7EB',
-  borderRadius: 10,
-  padding: '12px 14px',
-  marginTop: 12,
+  backgroundColor: '#FFFBEC',
+  border: '1px solid #FFDA43',
+  borderRadius: 20,
+  padding: '24px',
+  marginTop: 32,
 }

@@ -9,13 +9,12 @@ import {
   SPENDING_HINT,
   PHILOSOPHY_HINT,
   FREQUENCY_HINT,
-  INSIGHTS,
   BREAKDOWN_LABELS,
   CTA_URL,
-  GUIDE_URL,
 } from './data.js'
 import {
   COLORS,
+  MODERN_GRADIENT,
   CARD_STYLE,
   CARD_TOP_BAR,
   OPTION_BASE,
@@ -28,42 +27,58 @@ import {
 
 // ─── OptionCard ────────────────────────────────────────────────────────────────
 function OptionCard({ emoji, label, description, selected, onSelect }) {
+  const [hovered, setHovered] = useState(false)
+  const style = selected
+    ? OPTION_SELECTED
+    : { ...OPTION_BASE, backgroundColor: hovered ? '#F2F7FC' : '#F8F9FA' }
   return (
     <button
       onClick={onSelect}
-      style={selected ? OPTION_SELECTED : OPTION_BASE}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={style}
     >
-      <span style={{ fontSize: 22, flexShrink: 0 }}>{emoji}</span>
+      <span style={{ fontSize: 24, flexShrink: 0 }}>{emoji}</span>
       <span style={{ flex: 1 }}>
         <span style={{
           display: 'block',
-          fontSize: 15,
-          fontWeight: 600,
-          color: COLORS.gray900,
+          fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
+          fontSize: 18,
+          fontWeight: 700,
+          color: COLORS.gray800,
+          letterSpacing: '0.01em',
+          lineHeight: '24px',
           marginBottom: 2,
         }}>
           {label}
         </span>
-        <span style={{ fontSize: 13, color: COLORS.gray500, lineHeight: 1.4 }}>
+        <span style={{
+          fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
+          fontSize: 14,
+          fontWeight: 400,
+          color: COLORS.gray800,
+          lineHeight: '20px',
+          letterSpacing: '0.01em',
+        }}>
           {description}
         </span>
       </span>
-      {selected && (
-        <span style={{
-          flexShrink: 0,
-          width: 22,
-          height: 22,
-          borderRadius: '50%',
-          backgroundColor: COLORS.green,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+      <span style={{
+        flexShrink: 0,
+        width: 24,
+        height: 24,
+        borderRadius: '50%',
+        background: selected ? MODERN_GRADIENT : 'transparent',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        {selected && (
           <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
             <path d="M1 4L4.5 7.5L11 1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-        </span>
-      )}
+        )}
+      </span>
     </button>
   )
 }
@@ -86,10 +101,10 @@ function ProgressBar({ step }) {
             key={i}
             style={{
               height: 8,
+              width: 8,
               borderRadius: 4,
-              backgroundColor: isActive || isCompleted ? COLORS.green : COLORS.gray300,
-              width: isActive ? 28 : 8,
-              transition: 'width 300ms ease, background-color 300ms ease',
+              background: isActive || isCompleted ? MODERN_GRADIENT : COLORS.gray300,
+              transition: 'background 300ms ease',
             }}
           />
         )
@@ -107,15 +122,19 @@ function StepAge({ age, onChange }) {
         marginBottom: 24,
       }}>
         <div style={{
-          fontSize: 72,
-          fontWeight: 800,
-          color: COLORS.green,
+          fontSize: 80,
+          fontWeight: 700,
+          fontFamily: "'Lato', sans-serif",
+          background: MODERN_GRADIENT,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
           lineHeight: 1,
           marginBottom: 4,
         }}>
           {age}
         </div>
-        <div style={{ fontSize: 16, color: COLORS.gray500, fontWeight: 500 }}>
+        <div style={{ fontSize: 16, color: COLORS.gray800, fontWeight: 600 }}>
           years old
         </div>
       </div>
@@ -133,17 +152,17 @@ function StepAge({ age, onChange }) {
             onChange={(e) => onChange(Number(e.target.value))}
             style={{
               width: '100%',
-              accentColor: COLORS.green,
-              background: `linear-gradient(to right, ${COLORS.green} 0%, ${COLORS.green} ${((age - 4) / 14) * 100}%, #E5E7EB ${((age - 4) / 14) * 100}%, #E5E7EB 100%)`,
+              accentColor: COLORS.primary,
+              background: `linear-gradient(to right, #25B8E8 0%, #634AEF ${((age - 4) / 14) * 100}%, #DAE0E4 ${((age - 4) / 14) * 100}%, #DAE0E4 100%)`,
             }}
           />
         </div>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
-          fontSize: 13,
-          color: COLORS.gray500,
-          fontWeight: 500,
+          fontSize: 16,
+          color: COLORS.gray800,
+          fontWeight: 400,
           marginTop: 4,
         }}>
           <span>4</span>
@@ -157,7 +176,7 @@ function StepAge({ age, onChange }) {
 // ─── StepCost ──────────────────────────────────────────────────────────────────
 function StepCost({ value, onChange }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       {COST_OPTIONS.map((opt) => (
         <OptionCard
           key={opt.id}
@@ -176,7 +195,7 @@ function StepCost({ value, onChange }) {
 function StepSpending({ value, onChange }) {
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {SPENDING_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -188,13 +207,11 @@ function StepSpending({ value, onChange }) {
           />
         ))}
       </div>
-      {value && (
-        <div style={HINT_BOX}>
-          <p style={{ margin: 0, fontSize: 13, color: COLORS.gray700, lineHeight: 1.5 }}>
-            💡 {SPENDING_HINT[value]}
-          </p>
-        </div>
-      )}
+      <div style={HINT_BOX}>
+        <p style={{ margin: 0, fontSize: 14, color: COLORS.gray800, lineHeight: '20px', letterSpacing: '0.14px' }}>
+          <strong>💡 Keep in mind:</strong>{' '}{SPENDING_HINT}
+        </p>
+      </div>
     </div>
   )
 }
@@ -203,7 +220,7 @@ function StepSpending({ value, onChange }) {
 function StepPhilosophy({ value, onChange }) {
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {PHILOSOPHY_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -215,23 +232,21 @@ function StepPhilosophy({ value, onChange }) {
           />
         ))}
       </div>
-      {value && (
-        <div style={HINT_BOX}>
-          <p style={{ margin: 0, fontSize: 13, color: COLORS.gray700, lineHeight: 1.5 }}>
-            💡 {PHILOSOPHY_HINT[value]}
-          </p>
-        </div>
-      )}
+      <div style={HINT_BOX}>
+        <p style={{ margin: 0, fontSize: 14, color: COLORS.gray800, lineHeight: '20px', letterSpacing: '0.14px' }}>
+          <strong>💡 Did you know?</strong>{' '}{PHILOSOPHY_HINT}
+        </p>
+      </div>
     </div>
   )
 }
 
 // ─── StepFrequency ─────────────────────────────────────────────────────────────
 function StepFrequency({ value, age, onChange }) {
-  const ageGroup = age <= 12 ? 'young' : 'teen'
+  const ageGroup = age <= 15 ? 'young' : 'teen'
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {FREQUENCY_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -244,8 +259,8 @@ function StepFrequency({ value, age, onChange }) {
         ))}
       </div>
       <div style={HINT_BOX}>
-        <p style={{ margin: 0, fontSize: 13, color: COLORS.gray700, lineHeight: 1.5 }}>
-          💡 {FREQUENCY_HINT[ageGroup]}
+        <p style={{ margin: 0, fontSize: 14, color: COLORS.gray800, lineHeight: '20px', letterSpacing: '0.14px' }}>
+          <strong>💡 Our recommendation for age {age} — {FREQUENCY_HINT[ageGroup].recommendation}</strong>{' '}{FREQUENCY_HINT[ageGroup].body}
         </p>
       </div>
     </div>
@@ -257,31 +272,42 @@ function HeroCard({ result, frequency }) {
   const label = frequency === 'weekly' ? 'week' : 'month'
   return (
     <div style={{
-      background: `linear-gradient(135deg, ${COLORS.navy} 0%, ${COLORS.navyLight} 100%)`,
+      background: 'linear-gradient(118.31deg, #121944 0.449%, #062931 99.083%)',
       borderRadius: 20,
-      padding: '32px 28px',
+      padding: '32px 28px 28px',
       textAlign: 'center',
       marginBottom: 16,
+      overflow: 'hidden',
     }}>
-      <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 500, marginBottom: 8, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+      <div style={{ fontSize: 16, fontWeight: 600, color: '#FFFFFF', letterSpacing: '0.16px', marginBottom: 16 }}>
         Recommended allowance
       </div>
-      <div style={{ fontSize: 52, fontWeight: 800, color: '#FFFFFF', lineHeight: 1, marginBottom: 4 }}>
+      <div style={{
+        fontFamily: "'Lato', sans-serif",
+        fontSize: 52,
+        fontWeight: 700,
+        letterSpacing: '0.52px',
+        background: 'linear-gradient(to right, #7ACFF6, #21F8FF)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        lineHeight: 1,
+        marginBottom: 8,
+      }}>
         ${result.displayLow}–${result.displayHigh}
       </div>
-      <div style={{ fontSize: 18, color: 'rgba(255,255,255,0.7)', fontWeight: 500, marginBottom: 24 }}>
-        per {label}
+      <div style={{ fontSize: 20, fontWeight: 600, color: '#FFFFFF', letterSpacing: '0.2px', marginBottom: 24 }}>
+        Per {label}
       </div>
       <div style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 8,
-        backgroundColor: 'rgba(255,255,255,0.08)',
-        borderRadius: 10,
-        padding: '10px 18px',
+        backgroundColor: 'rgba(255,255,255,0.10)',
+        borderRadius: 16,
+        padding: '12px 24px',
       }}>
-        <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>Yearly total:</span>
-        <span style={{ fontSize: 16, fontWeight: 700, color: COLORS.green }}>
+        <span style={{ fontSize: 16, fontWeight: 300, color: '#FFFFFF' }}>Yearly total:&nbsp;</span>
+        <span style={{ fontSize: 16, fontWeight: 700, color: '#FFFFFF' }}>
           ${result.yearlyLow.toLocaleString()}–${result.yearlyHigh.toLocaleString()}
         </span>
       </div>
@@ -291,75 +317,68 @@ function HeroCard({ result, frequency }) {
 
 // ─── BreakdownCard ─────────────────────────────────────────────────────────────
 function BreakdownCard({ answers, result }) {
+  const MEDIUM_SHADOW = '0px 8px 24px rgba(220,223,252,0.2), 0px 4px 8px rgba(220,223,252,0.08)'
   const rows = [
     {
       label: `National base for age ${answers.age}`,
       value: `$${result.weeklyLow}–$${result.weeklyHigh}/wk`,
-      valueColor: COLORS.gray700,
+      valueColor: COLORS.gray800,
     },
     {
       label: 'Cost of living',
       value: BREAKDOWN_LABELS.cost[answers.cost],
-      valueColor: answers.cost !== 'average' ? COLORS.green : COLORS.gray500,
+      valueColor: answers.cost !== 'average' ? COLORS.gray800 : COLORS.gray500,
     },
     {
       label: 'Spending responsibilities',
       value: BREAKDOWN_LABELS.spending[answers.spending],
-      valueColor: answers.spending !== 'fun' ? COLORS.green : COLORS.gray500,
+      valueColor: answers.spending !== 'fun' ? COLORS.gray800 : COLORS.gray500,
     },
     {
-      label: 'Payment frequency',
+      label: 'Allowance frequency',
       value: BREAKDOWN_LABELS.frequency[answers.frequency],
-      valueColor: COLORS.gray700,
+      valueColor: COLORS.gray800,
     },
   ]
 
   return (
     <div style={{
       backgroundColor: COLORS.white,
-      borderRadius: 16,
+      borderRadius: 20,
       border: `1px solid ${COLORS.gray200}`,
       overflow: 'hidden',
       marginBottom: 16,
+      boxShadow: MEDIUM_SHADOW,
     }}>
       <div style={{
-        padding: '14px 20px',
+        height: 56,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderBottom: `1px solid ${COLORS.gray200}`,
-        backgroundColor: COLORS.gray100,
+        backgroundColor: COLORS.bg,
       }}>
-        <span style={{ fontSize: 13, fontWeight: 600, color: COLORS.gray700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          How we got here
+        <span style={{ fontSize: 16, fontWeight: 400, color: COLORS.gray800, letterSpacing: '0.16px' }}>
+          How we calculated this
         </span>
       </div>
       {rows.map((row, i) => (
-        <div
-          key={i}
-          style={{
+        <div key={i}>
+          <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '13px 20px',
-            borderBottom: i < rows.length - 1 ? `1px solid ${COLORS.gray200}` : 'none',
-          }}
-        >
-          <span style={{ fontSize: 14, color: COLORS.gray700 }}>{row.label}</span>
-          <span style={{ fontSize: 14, fontWeight: 600, color: row.valueColor }}>{row.value}</span>
+            height: 52,
+            padding: '0 20px',
+          }}>
+            <span style={{ fontSize: 14, color: COLORS.gray800, letterSpacing: '0.14px', lineHeight: '20px' }}>{row.label}</span>
+            <span style={{ fontSize: 14, color: row.valueColor, letterSpacing: '0.14px', lineHeight: '20px' }}>{row.value}</span>
+          </div>
+          {i < rows.length - 1 && (
+            <div style={{ height: 1, backgroundColor: COLORS.gray200 }} />
+          )}
         </div>
       ))}
-    </div>
-  )
-}
-
-// ─── InsightCard ───────────────────────────────────────────────────────────────
-function InsightCard({ headline, body }) {
-  return (
-    <div style={{ ...INSIGHT_CARD, marginBottom: 12 }}>
-      <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.navyMid, marginBottom: 6 }}>
-        {headline}
-      </div>
-      <div style={{ fontSize: 13, color: COLORS.gray700, lineHeight: 1.6 }}>
-        {body}
-      </div>
     </div>
   )
 }
@@ -367,37 +386,64 @@ function InsightCard({ headline, body }) {
 // ─── ResultsPage ───────────────────────────────────────────────────────────────
 function ResultsPage({ answers, onRestart, onAdjust }) {
   const result = calculate(answers)
-  const ageGroup = answers.age <= 12 ? 'young' : 'teen'
-  const insightSet = INSIGHTS[answers.philosophy][answers.frequency][ageGroup]
+  const MEDIUM_SHADOW = '0px 8px 24px rgba(220,223,252,0.2), 0px 4px 8px rgba(220,223,252,0.08)'
 
   return (
     <div>
+      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: 24 }}>
-        <div style={{ fontSize: 22, fontWeight: 800, color: COLORS.navy, marginBottom: 6 }}>
+        <div style={{ fontSize: 24, fontWeight: 700, color: COLORS.gray800, lineHeight: '28.8px', marginBottom: 4 }}>
           Your personalized recommendation
         </div>
-        <div style={{ fontSize: 14, color: COLORS.gray500, lineHeight: 1.5 }}>
-          Based on national research, local costs, and your family's approach
+        <div style={{ fontSize: 16, color: COLORS.gray800, lineHeight: '24px', letterSpacing: '0.16px' }}>
+          Based on anonymized data from 9,135 U.S. families on Till
         </div>
       </div>
 
       <HeroCard result={result} frequency={answers.frequency} />
       <BreakdownCard answers={answers} result={result} />
 
-      <div style={{ marginBottom: 16 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: COLORS.gray700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 10 }}>
-          Insights for your family
+      {/* Fixed note */}
+      <div style={{
+        backgroundColor: '#E9F2FA',
+        border: '1px solid #E1ECF5',
+        borderRadius: 20,
+        padding: 24,
+        marginBottom: 16,
+        boxShadow: MEDIUM_SHADOW,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+        marginBottom: 36,
+      }}>
+        <div style={{ fontSize: 16, fontWeight: 700, color: COLORS.gray800, letterSpacing: '0.14px', lineHeight: '24px' }}>
+          A starting point, not a rule.
         </div>
-        {insightSet.map((card, i) => (
-          <InsightCard key={i} headline={card.headline} body={card.body} />
-        ))}
+        <div style={{ fontSize: 14, fontWeight: 400, color: COLORS.gray800, lineHeight: '20px', letterSpacing: '0.14px' }}>
+          This is a starting point, not a rulebook. Every family has different goals, values, and budgets — and you know your kid better than any calculator does. What matters most is that your child gets consistent practice making real decisions with real money.
+        </div>
       </div>
 
+      {/* Pre-CTA text */}
+      <div style={{
+        fontSize: 16,
+        fontWeight: 400,
+        color: COLORS.gray800,
+        lineHeight: '24px',
+        letterSpacing: '0.16px',
+        textAlign: 'center',
+        marginBottom: 16,
+      }}>
+        Till is a family banking app and debit card for kids and teens. Automate allowance, set up chores, keep an eye on their spending, and much more.
+      </div>
+
+      {/* CTA */}
       <div style={{ marginBottom: 24 }}>
         <a
           href={CTA_URL}
           target="_blank"
           rel="noreferrer"
+          className="btn-primary"
           style={{
             ...PRIMARY_BUTTON,
             display: 'block',
@@ -406,36 +452,18 @@ function ResultsPage({ answers, onRestart, onAdjust }) {
             marginBottom: 14,
           }}
         >
-          Get started with Till →
+          Learn more about Till
         </a>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 24 }}>
-          <button onClick={onRestart} style={GHOST_BUTTON}>
+          <button onClick={onRestart} className="btn-ghost" style={GHOST_BUTTON}>
             Start over
           </button>
-          <button onClick={onAdjust} style={GHOST_BUTTON}>
+          <button onClick={onAdjust} className="btn-ghost" style={GHOST_BUTTON}>
             Adjust answers
           </button>
         </div>
       </div>
 
-      <div style={{
-        textAlign: 'center',
-        fontSize: 12,
-        color: COLORS.gray500,
-        lineHeight: 1.6,
-        paddingTop: 16,
-        borderTop: `1px solid ${COLORS.gray200}`,
-      }}>
-        Ranges based on American Institute of CPAs and T. Rowe Price research.{' '}
-        <a
-          href={GUIDE_URL}
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: COLORS.green, textDecoration: 'none', fontWeight: 500 }}
-        >
-          Read our full allowance guide →
-        </a>
-      </div>
     </div>
   )
 }
@@ -484,7 +512,7 @@ export default function App() {
   // Outer page background
   const pageStyle = {
     minHeight: '100vh',
-    background: 'linear-gradient(160deg, #F0FDF4 0%, #F9FAFB 50%, #EFF6FF 100%)',
+    background: '#F6F6F8',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
@@ -505,21 +533,23 @@ export default function App() {
               <ProgressBar step={step} />
 
               {/* Step header */}
-              <div style={{ marginBottom: 20 }}>
+              <div style={{ marginBottom: 32 }}>
                 <h2 style={{
                   margin: '0 0 6px',
-                  fontSize: 20,
-                  fontWeight: 800,
-                  color: COLORS.navy,
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: COLORS.gray800,
                   lineHeight: 1.2,
+                  textAlign: 'center',
                 }}>
                   {stepContent.question}
                 </h2>
                 <p style={{
                   margin: 0,
-                  fontSize: 14,
-                  color: COLORS.gray500,
+                  fontSize: 16,
+                  color: COLORS.gray800,
                   lineHeight: 1.5,
+                  textAlign: 'center',
                 }}>
                   {stepContent.subtext}
                 </p>
@@ -572,13 +602,13 @@ export default function App() {
                 marginTop: 28,
               }}>
                 {step > 0 && (
-                  <button onClick={goBack} style={{
+                  <button onClick={goBack} className="btn-back" style={{
                     background: 'none',
                     border: 'none',
-                    color: COLORS.gray500,
-                    fontSize: 14,
-                    fontWeight: 500,
-                    fontFamily: 'DM Sans, sans-serif',
+                    color: COLORS.gray600,
+                    fontSize: 16,
+                    fontWeight: 400,
+                    fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
                     cursor: 'pointer',
                     padding: '8px 0',
                     display: 'flex',
@@ -591,6 +621,7 @@ export default function App() {
                 {step < 4 ? (
                   <button
                     onClick={goNext}
+                    className="btn-primary"
                     style={{ ...PRIMARY_BUTTON, width: 'auto', padding: '12px 28px' }}
                   >
                     Next →
@@ -598,9 +629,10 @@ export default function App() {
                 ) : (
                   <button
                     onClick={goNext}
+                    className="btn-primary"
                     style={{ ...PRIMARY_BUTTON, width: 'auto', padding: '12px 28px' }}
                   >
-                    See My Recommendation →
+                    See My Recommendation
                   </button>
                 )}
               </div>
