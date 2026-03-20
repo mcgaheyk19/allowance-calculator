@@ -34,8 +34,8 @@ function OptionCard({ emoji, label, description, selected, onSelect }) {
   return (
     <button
       onClick={onSelect}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onPointerEnter={(e) => { if (e.pointerType === 'mouse') setHovered(true) }}
+      onPointerLeave={(e) => { if (e.pointerType === 'mouse') setHovered(false) }}
       className="option-card"
       style={style}
     >

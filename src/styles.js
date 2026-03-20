@@ -40,7 +40,7 @@ export const OPTION_BASE = {
   display: 'flex',
   alignItems: 'center',
   gap: 12,
-  padding: '0 16px 0 15px',
+  padding: 16,
   borderRadius: 20,
   border: '1px solid #F2F5F8',
   backgroundColor: '#F8F9FA',
