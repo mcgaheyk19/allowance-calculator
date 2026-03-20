@@ -63,7 +63,7 @@ function OptionCard({ emoji, label, description, selected, onSelect }) {
           {description}
         </span>
       </span>
-      <span style={{
+      <span className="option-check" style={{
         flexShrink: 0,
         width: 24,
         height: 24,
@@ -595,7 +595,7 @@ export default function App() {
               </div>
 
               {/* Navigation */}
-              <div style={{
+              <div className={step === 4 ? 'nav-step4' : undefined} style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: step === 0 ? 'flex-end' : 'space-between',

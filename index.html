@@ -29,6 +29,12 @@
       .btn-primary:active { filter: brightness(0.87); transform: translateY(0); }
       .btn-ghost:hover { opacity: 0.65; }
       .btn-back:hover { opacity: 0.65; }
+      @media (max-width: 480px) {
+        .option-check { display: none !important; }
+        .nav-step4 { flex-direction: column-reverse; align-items: stretch !important; gap: 8px; }
+        .nav-step4 .btn-primary { width: 100% !important; text-align: center; box-sizing: border-box; }
+        .nav-step4 .btn-back { justify-content: center; }
+      }
       input[type="range"] {
         -webkit-appearance: none;
         appearance: none;

@@ -46,7 +46,7 @@ export const OPTION_BASE = {
   backgroundColor: '#F8F9FA',
   cursor: 'pointer',
   transition: 'border-color 150ms ease',
-  height: 96,
+  minHeight: 96,
   textAlign: 'left',
   width: '100%',
   boxSizing: 'border-box',
