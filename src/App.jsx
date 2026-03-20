@@ -512,7 +512,7 @@ export default function App() {
   // Outer page background
   const pageStyle = {
     minHeight: '100vh',
-    background: '#F6F6F8',
+    background: 'transparent',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
