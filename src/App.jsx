@@ -36,11 +36,12 @@ function OptionCard({ emoji, label, description, selected, onSelect }) {
       onClick={onSelect}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className="option-card"
       style={style}
     >
-      <span style={{ fontSize: 24, flexShrink: 0 }}>{emoji}</span>
+      <span className="option-emoji" style={{ fontSize: 24, flexShrink: 0 }}>{emoji}</span>
       <span style={{ flex: 1 }}>
-        <span style={{
+        <span className="option-label" style={{
           display: 'block',
           fontFamily: "'Nunito', 'Varela Round', Arial, sans-serif",
           fontSize: 18,
@@ -176,7 +177,7 @@ function StepAge({ age, onChange }) {
 // ─── StepCost ──────────────────────────────────────────────────────────────────
 function StepCost({ value, onChange }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <div className="options-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       {COST_OPTIONS.map((opt) => (
         <OptionCard
           key={opt.id}
@@ -195,7 +196,7 @@ function StepCost({ value, onChange }) {
 function StepSpending({ value, onChange }) {
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className="options-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {SPENDING_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -220,7 +221,7 @@ function StepSpending({ value, onChange }) {
 function StepPhilosophy({ value, onChange }) {
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className="options-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {PHILOSOPHY_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -246,7 +247,7 @@ function StepFrequency({ value, age, onChange }) {
   const ageGroup = age <= 15 ? 'young' : 'teen'
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div className="options-list" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {FREQUENCY_OPTIONS.map((opt) => (
           <OptionCard
             key={opt.id}
@@ -522,12 +523,12 @@ export default function App() {
   const cardPadding = '28px 28px 32px'
 
   return (
-    <div style={pageStyle}>
+    <div className="calc-page" style={pageStyle}>
       <div style={CARD_STYLE}>
         {/* Green top bar */}
         <div style={CARD_TOP_BAR} />
 
-        <div style={{ padding: cardPadding }}>
+        <div className="card-inner" style={{ padding: cardPadding }}>
           {step < 5 ? (
             <>
               <ProgressBar step={step} />
