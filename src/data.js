@@ -23,26 +23,20 @@ export const SPENDING_OPTIONS = [
   {
     id: 'fun',
     emoji: '🍬',
-    label: 'Fun money only',
-    description: 'Treats, small toys, and impulse buys — parents cover everything else',
+    label: 'Fun money',
+    description: 'Treats, snacks, small toys, impulse buys. Parents still cover everything that matters.',
   },
   {
     id: 'personal',
     emoji: '🎮',
-    label: 'Personal items',
-    description: 'Entertainment, hobbies, and personal care products',
-  },
-  {
-    id: 'real',
-    emoji: '👟',
-    label: 'Real-world purchases',
-    description: 'Clothing, shoes, and some bigger-ticket items',
+    label: 'Personal spending',
+    description: 'Clothes, games, hobbies, outings with friends, personal care. They\'re spending on real things but parents still cover the big stuff.',
   },
   {
     id: 'full',
     emoji: '⛽',
     label: 'Full independence',
-    description: 'Gas, socializing, most day-to-day expenses — maximum responsibility',
+    description: 'Gas, car costs, most day-to-day expenses. They\'re managing money like a young adult.',
   },
 ]
 
@@ -319,7 +313,6 @@ export const BREAKDOWN_LABELS = {
   spending: {
     fun:      'No adjustment',
     personal: '+30%',
-    real:     '+90%',
     full:     '+160%',
   },
   frequency: {

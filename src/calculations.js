@@ -25,7 +25,6 @@ export const COST_MULTIPLIER = {
 export const SPENDING_MULTIPLIER = {
   fun:      1.0,
   personal: 1.3,
-  real:     1.9,
   full:     2.6,
 }
 
