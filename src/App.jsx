@@ -385,7 +385,7 @@ function BreakdownCard({ answers, result }) {
 }
 
 // ─── ResultsPage ───────────────────────────────────────────────────────────────
-function ResultsPage({ answers, onRestart, onAdjust }) {
+function ResultsPage({ answers, onRestart }) {
   const result = calculate(answers)
   const MEDIUM_SHADOW = '0px 8px 24px rgba(220,223,252,0.2), 0px 4px 8px rgba(220,223,252,0.08)'
 
@@ -455,12 +455,9 @@ function ResultsPage({ answers, onRestart, onAdjust }) {
         >
           Learn more about Till
         </a>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button onClick={onRestart} className="btn-ghost" style={GHOST_BUTTON}>
             Start over
-          </button>
-          <button onClick={onAdjust} className="btn-ghost" style={GHOST_BUTTON}>
-            Adjust answers
           </button>
         </div>
       </div>
@@ -647,7 +644,6 @@ export default function App() {
               <ResultsPage
                 answers={answers}
                 onRestart={restart}
-                onAdjust={() => transition(() => setStep(0))}
               />
             </div>
           )}
