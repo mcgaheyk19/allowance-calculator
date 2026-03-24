@@ -3,4 +3,13 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/calculator.js',
+        chunkFileNames: 'assets/calculator-[name].js',
+        assetFileNames: 'assets/calculator[extname]',
+      },
+    },
+  },
 })
