@@ -155,6 +155,8 @@ function StepAge({ age, onChange }) {
               width: '100%',
               accentColor: COLORS.primary,
               background: `linear-gradient(to right, #25B8E8 0%, #634AEF ${((age - 4) / 14) * 100}%, #DAE0E4 ${((age - 4) / 14) * 100}%, #DAE0E4 100%)`,
+              border: 'none',
+              outline: 'none',
             }}
           />
         </div>
