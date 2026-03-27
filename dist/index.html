@@ -8,16 +8,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Lato:wght@700&display=swap"
       rel="stylesheet"
     />
     <style>
       * { box-sizing: border-box; }
+      html {
+        background: transparent;
+      }
       body {
         margin: 0;
         background: transparent;
-        font-family: 'DM Sans', sans-serif;
+        font-family: 'Nunito', 'Varela Round', 'Trebuchet MS', Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        background: transparent;
+      }
+      .btn-primary:hover { filter: brightness(0.93); transform: translateY(-1px); }
+      .btn-primary:active { filter: brightness(0.87); transform: translateY(0); }
+      .btn-ghost:hover { opacity: 0.65; }
+      .btn-back:hover { opacity: 0.65; }
+      @media (max-width: 480px) {
+        .option-check { display: none !important; }
+        .nav-step4 { flex-direction: column-reverse; align-items: stretch !important; gap: 8px; }
+        .nav-step4 .btn-primary { width: 100% !important; text-align: center; box-sizing: border-box; }
+        .nav-step4 .btn-back { justify-content: center; }
+        .calc-page { padding-left: 0 !important; padding-right: 0 !important; }
+        .card-inner { padding: 16px 16px 24px !important; }
+        .options-list { gap: 8px !important; }
+        .option-card { padding: 12px !important; }
+        .option-emoji { font-size: 18px !important; }
+        .option-label { font-size: 16px !important; }
       }
       input[type="range"] {
         -webkit-appearance: none;
@@ -34,18 +56,18 @@
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background: #00C853;
+        background: linear-gradient(166deg, #25B8E8 11.772%, #1E94CF 51.924%, #634AEF 92.075%);
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,200,83,0.4);
+        box-shadow: 0 2px 8px rgba(99,74,239,0.35);
         border: 3px solid #fff;
       }
       input[type="range"]::-moz-range-thumb {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        background: #00C853;
+        background: linear-gradient(166deg, #25B8E8 11.772%, #1E94CF 51.924%, #634AEF 92.075%);
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,200,83,0.4);
+        box-shadow: 0 2px 8px rgba(99,74,239,0.35);
         border: 3px solid #fff;
       }
     </style>
@@ -65,9 +87,9 @@
         )
       }, 150)
     </script>
-    <script type="module" crossorigin src="/assets/index-D8w1z8-D.js"></script>
+    <script type="module" crossorigin src="/assets/calculator.js"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="allowance-calculator"></div>
   </body>
 </html>
