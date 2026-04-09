@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { calculate } from './calculations.js'
 import {
   COST_OPTIONS,
@@ -24,6 +24,11 @@ import {
   INSIGHT_CARD,
   HINT_BOX,
 } from './styles.js'
+
+// ─── Analytics ─────────────────────────────────────────────────────────────────
+function track(eventName, params = {}) {
+  window.gtag?.('event', eventName, { event_category: 'allowance_calculator', ...params })
+}
 
 // ─── OptionCard ────────────────────────────────────────────────────────────────
 function OptionCard({ emoji, label, description, selected, onSelect }) {
@@ -446,6 +451,7 @@ function ResultsPage({ answers, onRestart }) {
           href={CTA_URL}
           target="_blank"
           rel="noreferrer"
+          onClick={() => track('cta_clicked')}
           className="btn-primary"
           style={{
             ...PRIMARY_BUTTON,
@@ -480,6 +486,10 @@ export default function App() {
     frequency:  'weekly',
   })
 
+  useEffect(() => {
+    track('calculator_started')
+  }, [])
+
   function transition(fn) {
     setVisible(false)
     setTimeout(() => {
@@ -489,7 +499,19 @@ export default function App() {
   }
 
   function goNext() {
-    transition(() => setStep((s) => s + 1))
+    const nextStep = step + 1
+    if (nextStep === 5) {
+      track('results_viewed', {
+        child_age:   answers.age,
+        cost:        answers.cost,
+        spending:    answers.spending,
+        philosophy:  answers.philosophy,
+        frequency:   answers.frequency,
+      })
+    } else {
+      track('step_completed', { step_number: step + 1 })
+    }
+    transition(() => setStep(nextStep))
   }
 
   function goBack() {
@@ -497,6 +519,7 @@ export default function App() {
   }
 
   function restart() {
+    track('calculator_restarted')
     transition(() => {
       setAnswers({ age: 13, cost: 'average', spending: 'fun', philosophy: 'fixed', frequency: 'weekly' })
       setStep(0)
